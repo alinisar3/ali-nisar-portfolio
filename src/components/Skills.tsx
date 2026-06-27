@@ -2,7 +2,7 @@
 import { motion, Variants } from "framer-motion";
 import { 
   SiHtml5, 
-  SiCss, // FIX: Changed import to SiCss3 (standard in latest react-icons)
+  SiCss, 
   SiTailwindcss, 
   SiJavascript, 
   SiReact, 
@@ -15,7 +15,6 @@ import {
   SiGit 
 } from "react-icons/si";
 
-// Array of skills with their icons and brand colors for the hover effect
 const SKILLS_DATA = [
   { name: "HTML5", icon: <SiHtml5 className="text-[#E34F26]" />, color: "rgba(227, 79, 38, 0.2)" },
   { name: "CSS3", icon: <SiCss className="text-[#1572B6]" />, color: "rgba(21, 114, 182, 0.2)" },
@@ -36,9 +35,7 @@ export default function Skills() {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { 
-        staggerChildren: 0.08 
-      },
+      transition: { staggerChildren: 0.08 },
     },
   };
 
@@ -47,10 +44,7 @@ export default function Skills() {
     visible: { 
       y: 0, 
       opacity: 1, 
-      transition: { 
-        duration: 0.4, 
-        ease: "easeOut" 
-      } 
+      transition: { duration: 0.4, ease: "easeOut" } 
     },
   };
 
@@ -64,7 +58,14 @@ export default function Skills() {
           className="mb-16"
         >
           <h2 className="text-xs font-mono text-blue-500 uppercase tracking-[0.4em] mb-4 text-left">Technical Stack</h2>
-          <h3 className="text-5xl md:text-7xl font-black tracking-tighter text-white text-left uppercase">
+          
+          {/* 
+             FIXED HEADING SIZE: 
+             - text-[2.6rem] ensures 'TECHNOLOGIES.' fits on iPhone/Android without clipping.
+             - sm:text-5xl and md:text-7xl matches the massive Jensen design on larger screens.
+             - leading-[0.85] creates the tight, high-end architectural look from your screenshot.
+          */}
+          <h3 className="text-[2.6rem] sm:text-5xl md:text-7xl font-black tracking-tighter text-white text-left uppercase leading-[0.85]">
             SKILLS & <br /> <span className="text-gray-500">TECHNOLOGIES.</span>
           </h3>
         </motion.div>
@@ -81,38 +82,23 @@ export default function Skills() {
               key={skill.name}
               variants={itemVariants}
               whileHover={{ scale: 1.05 }}
-              /* 
-                 FIX: Avoided animating 'backgroundColor' in whileHover to stop the oklab error.
-                 Instead, we use standard CSS classes and transitions.
-              */
               className="group relative flex flex-col items-center justify-center p-8 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-md transition-all duration-300 hover:bg-white/10"
-              style={{
-                // Standard CSS variables for hover effects (Stable for oklab)
-                borderImageSource: `linear-gradient(to right, transparent, ${skill.color}, transparent)`
-              }}
             >
               <div className="text-5xl mb-4 filter grayscale group-hover:grayscale-0 transition-all duration-500">
                 {skill.icon}
               </div>
-              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500 group-hover:text-white transition-colors">
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500 group-hover:text-white transition-colors text-center">
                 {skill.name}
               </p>
               
-              {/* 
-                 FIX FOR OKLAB ERROR: 
-                 We use a separate div for the background glow. 
-                 Since we use standard Tailwind 'opacity-0 group-hover:opacity-100', 
-                 Framer Motion doesn't try to animate the color string, solving the error.
-              */}
+              {/* Dynamic Glow Background (Bypasses oklab color error) */}
               <div 
                 className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-2xl z-[-1]" 
                 style={{ backgroundColor: skill.color }}
               />
               
-              {/* Subtle Border Highlight on hover */}
-              <div 
-                className="absolute inset-0 rounded-2xl border border-transparent group-hover:border-white/20 transition-all duration-500" 
-              />
+              {/* Hover Border highlight */}
+              <div className="absolute inset-0 rounded-2xl border border-transparent group-hover:border-white/20 transition-all duration-500" />
             </motion.div>
           ))}
         </motion.div>
