@@ -54,7 +54,7 @@ export default function Hero() {
           </div>
 
           <h1 className="hero-reveal text-4xl md:text-7xl xl:text-8xl font-black tracking-tight text-white leading-tight lg:leading-none uppercase">
-            WEB <br /> 
+            FULL STACK <br /> 
             <span className="text-gray-500 font-light italic">DEVELOPER</span>
           </h1>
 
