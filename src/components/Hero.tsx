@@ -63,7 +63,7 @@ export default function Hero() {
               Got a project?
             </a>
             <a 
-              href="/Ali-Nisar-Resume.pdf" 
+              href="/ali-nisar-resume.pdf" 
               target="_blank" 
               rel="noopener noreferrer"
               className="px-8 md:px-10 py-4 border border-blue-500/50 text-white font-bold uppercase tracking-widest text-[10px] rounded-none hover:bg-blue-600/10 transition-all"
